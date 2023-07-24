@@ -2,6 +2,9 @@ import 'package:bloc_learning/features/home/bloc/home_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../cart/screens/cart.dart';
+import '../../wishlist/screens/wishlist.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -15,13 +18,24 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return BlocConsumer<HomeBloc, HomeState>(
       bloc: HomeBloc(),
-      // listenWhen: (previous, current) {
-
-      // },
-      // buildWhen: (previous, current) {
-
-      // },
-      listener: (context, state) {},
+      // listenWhen: (previous, current) => current is HomeActionState,
+      buildWhen: (previous, current) => current is! HomeActionState,
+      listener: (context, state) {
+        print('Listener has been called!');
+        if (state is HomeNavigateToCartPageActionState) {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (ctx) => const Cart(),
+            ),
+          );
+        } else if (state is HomeNavigateToWishlistPageActionState) {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (ctx) => const Wishlist(),
+            ),
+          );
+        }
+      },
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
