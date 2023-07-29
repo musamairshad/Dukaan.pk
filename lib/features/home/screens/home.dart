@@ -17,11 +17,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<HomeBloc, HomeState>(
-      bloc: HomeBloc(),
-      // listenWhen: (previous, current) => current is HomeActionState,
+      bloc: homeBloc,
+      listenWhen: (previous, current) => current is HomeActionState,
       buildWhen: (previous, current) => current is! HomeActionState,
       listener: (context, state) {
-        print('Listener has been called!');
         if (state is HomeNavigateToCartPageActionState) {
           Navigator.of(context).push(
             MaterialPageRoute(
