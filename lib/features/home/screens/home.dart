@@ -1,7 +1,6 @@
-import 'package:bloc_learning/features/home/bloc/home_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:bloc_learning/features/home/bloc/home_bloc.dart';
 import '../../cart/screens/cart.dart';
 import '../../wishlist/screens/wishlist.dart';
 
@@ -13,6 +12,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    homeBloc.add(HomeInitialEvent());
+    super.initState();
+  }
+
   final HomeBloc homeBloc = HomeBloc();
   @override
   Widget build(BuildContext context) {
@@ -36,29 +41,49 @@ class _HomeScreenState extends State<HomeScreen> {
         }
       },
       builder: (context, state) {
-        return Scaffold(
-          appBar: AppBar(
-            title: const Text('Usama Grocery App'),
-            actions: [
-              IconButton(
-                onPressed: () {
-                  homeBloc.add(
-                    HomeWishlistButtonNavigateEvent(),
-                  );
-                },
-                icon: const Icon(Icons.favorite_border),
+        switch (state.runtimeType) {
+          case HomeLoadingState:
+            return const Scaffold(
+              body: Center(
+                child: CircularProgressIndicator(
+                  color: Colors.teal,
+                ),
               ),
-              IconButton(
-                onPressed: () {
-                  homeBloc.add(
-                    HomeCartButtonNavigateEvent(),
-                  );
-                },
-                icon: const Icon(Icons.shopping_bag_outlined),
+            );
+          case HomeLoadedSuccessState:
+            return Scaffold(
+              appBar: AppBar(
+                title: const Text('Usama Grocery App'),
+                backgroundColor: Colors.teal,
+                actions: [
+                  IconButton(
+                    onPressed: () {
+                      homeBloc.add(
+                        HomeWishlistButtonNavigateEvent(),
+                      );
+                    },
+                    icon: const Icon(Icons.favorite_border),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      homeBloc.add(
+                        HomeCartButtonNavigateEvent(),
+                      );
+                    },
+                    icon: const Icon(Icons.shopping_bag_outlined),
+                  ),
+                ],
               ),
-            ],
-          ),
-        );
+            );
+          case HomeErrorState:
+            return const Scaffold(
+              body: Center(
+                child: Text('Error'),
+              ),
+            );
+          default:
+            return const SizedBox();
+        }
       },
     );
   }
