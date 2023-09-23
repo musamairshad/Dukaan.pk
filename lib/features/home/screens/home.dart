@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bloc_learning/features/home/bloc/home_bloc.dart';
 import '../../cart/screens/cart.dart';
 import '../../wishlist/screens/wishlist.dart';
+import 'package:bloc_learning/features/home/screens/product_tile_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -51,6 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             );
           case HomeLoadedSuccessState:
+            final successState = state as HomeLoadedSuccessState;
             return Scaffold(
               appBar: AppBar(
                 title: const Text('Usama Grocery App'),
@@ -73,6 +75,15 @@ class _HomeScreenState extends State<HomeScreen> {
                     icon: const Icon(Icons.shopping_bag_outlined),
                   ),
                 ],
+              ),
+              body: ListView.builder(
+                itemBuilder: (context, index) {
+                  return ProductTileWidget(
+                    product: successState.products[index],
+                    homeBloc: homeBloc,
+                  );
+                },
+                itemCount: successState.products.length,
               ),
             );
           case HomeErrorState:
