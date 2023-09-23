@@ -1,1 +1,1 @@
-# This repository contains material related to Flutter BLoC learning.
+# Grocery App made by using Flutter with BLoC state management.
