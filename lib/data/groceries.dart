@@ -6,7 +6,7 @@ class Groceries {
       'description': 'Fresh and juicy apples.',
       'price': 1.99,
       'imageUrl':
-          'https://post.healthline.com/wp-content/uploads/2020/09/Do_Apples_Affect_Diabetes_and_Blood_Sugar_Levels-732x549-thumbnail-1-732x549.jpg',
+          'https://img.freepik.com/premium-photo/red-apples-isolated-white-background-ripe-fresh-apples-clipping-path-apple-with-leaf_299651-595.jpg',
     },
     {
       'id': '2',
