@@ -39,6 +39,20 @@ class _HomeScreenState extends State<HomeScreen> {
               builder: (ctx) => const Wishlist(),
             ),
           );
+        } else if (state is HomeProductItemCartedActionState) {
+          ScaffoldMessenger.maybeOf(context)!.clearSnackBars();
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text("Item added to the cart."),
+            ),
+          );
+        } else if (state is HomeProductItemWishlistedActionState) {
+          ScaffoldMessenger.maybeOf(context)!.clearSnackBars();
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text("Item added to the wishlist."),
+            ),
+          );
         }
       },
       builder: (context, state) {
