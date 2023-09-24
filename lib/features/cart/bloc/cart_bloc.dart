@@ -25,6 +25,6 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       CartRemoveFromCartEvent event, Emitter<CartState> emit) {
     cartItems.remove(event.product);
     emit(CartSuccessState(cartItems: cartItems));
-    // emit one more state which is a actionable state for scaffold message.
+    emit(HomeProductItemRemoveFromCartActionState());
   }
 }
