@@ -40,14 +40,14 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           );
         } else if (state is HomeProductItemCartedActionState) {
-          ScaffoldMessenger.maybeOf(context)!.clearSnackBars();
+          ScaffoldMessenger.of(context).clearSnackBars();
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: Text("Item added to the cart."),
             ),
           );
         } else if (state is HomeProductItemWishlistedActionState) {
-          ScaffoldMessenger.maybeOf(context)!.clearSnackBars();
+          ScaffoldMessenger.of(context).clearSnackBars();
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: Text("Item added to the wishlist."),
@@ -58,10 +58,10 @@ class _HomeScreenState extends State<HomeScreen> {
       builder: (context, state) {
         switch (state.runtimeType) {
           case HomeLoadingState:
-            return const Scaffold(
+            return Scaffold(
               body: Center(
                 child: CircularProgressIndicator(
-                  color: Colors.teal,
+                  color: Colors.green.shade900,
                 ),
               ),
             );
@@ -69,8 +69,8 @@ class _HomeScreenState extends State<HomeScreen> {
             final successState = state as HomeLoadedSuccessState;
             return Scaffold(
               appBar: AppBar(
-                title: const Text('Usama Grocery App'),
-                backgroundColor: Colors.teal,
+                title: const Text('Dukaan.pk'),
+                backgroundColor: Colors.green.shade900,
                 actions: [
                   IconButton(
                     onPressed: () {
