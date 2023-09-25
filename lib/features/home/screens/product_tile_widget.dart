@@ -25,7 +25,7 @@ class ProductTileWidget extends StatelessWidget {
             width: double.maxFinite,
             child: Image.network(
               product.imageUrl,
-              // fit: BoxFit.contain,
+              fit: BoxFit.contain,
             ),
           ),
           const SizedBox(height: 20),
